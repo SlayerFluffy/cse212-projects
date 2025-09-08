@@ -1,3 +1,5 @@
+using System.Globalization;
+
 public static class Arrays
 {
     /// <summary>
@@ -13,7 +15,16 @@ public static class Arrays
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
 
-        return []; // replace this return statement with your own
+        // Create a return variable with an array the length of how many multiples you want
+        double[] result = new double[length];
+        // Create a for loop that loops as many times as you want multiples. 
+        for (int i = 1; i <= length; ++i)
+        {
+            // Multiply original number by the incremental value and add it to your return variable. Assign result to index of current iteration.
+            result[i-1] = number * i;
+        }
+
+        return result; // replace this return statement with your own
     }
 
     /// <summary>
@@ -29,5 +40,16 @@ public static class Arrays
         // Remember: Using comments in your program, write down your process for solving this problem
         // step by step before you write the code. The plan should be clear enough that it could
         // be implemented by another person.
+
+        // Create a for loop that iterates by the amount you want to rotate the list
+        for (int i = 0; i < amount; ++i)
+        {
+            // Pop the last value in the list and store it as a variable
+            int lastVal = data[data.Count-1];
+            data.RemoveAt(data.Count-1);
+            // Insert that variable at the start of the list at index 0
+            data.Insert(0, lastVal);
+
+        }
     }
 }
