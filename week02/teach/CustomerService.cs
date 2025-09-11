@@ -1,9 +1,14 @@
-﻿/// <summary>
+﻿using System.Collections;
+using System.Diagnostics;
+using System.Dynamic;
+
+/// <summary>
 /// Maintain a Customer Service Queue.  Allows new customers to be 
 /// added and allows customers to be serviced.
 /// </summary>
 public class CustomerService {
-    public static void Run() {
+    public static void Run()
+    {
         // Example code to see what's in the customer service queue:
         // var cs = new CustomerService(10);
         // Console.WriteLine(cs);
@@ -11,24 +16,55 @@ public class CustomerService {
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: make a queue with 0 length, then one with 15, then make one with 5
+        // Expected Result: first queue should default to 10, then 15, then 5
         Console.WriteLine("Test 1");
+        var customers = new CustomerService(0);
+        string customersString = customers.ToString();
+        Console.WriteLine(customersString);
 
-        // Defect(s) Found: 
+        customers = new CustomerService(15);
+        customersString = customers.ToString();
+        Console.WriteLine(customersString);
+
+        customers = new CustomerService(5);
+        customersString = customers.ToString();
+        Console.WriteLine(customersString);
+
+        // Defect(s) Found: none
 
         Console.WriteLine("=================");
 
         // Test 2
-        // Scenario: 
-        // Expected Result: 
+        // Scenario: Add customers to queue until max reached.
+        // Expected Result: Should alert when too many customers added, then show list of customers
         Console.WriteLine("Test 2");
 
-        // Defect(s) Found: 
+        customers = new CustomerService(3);
+        customers.AddNewCustomer();
+        customers.AddNewCustomer();
+        customers.AddNewCustomer();
+        customers.AddNewCustomer();
+        string cusString = customers.ToString();
+        Console.WriteLine(customers);
+
+        // Defect(s) Found: Size of queue was saving one size larger than entered.
 
         Console.WriteLine("=================");
 
         // Add more Test Cases As Needed Below
+
+        // Test 3
+        // Scenario: test dequeue
+        // Expected Result: Should be able to dequeue the next customer and display the details. Once empty, error message.
+        Console.WriteLine("Test 3");
+
+        customers.ServeCustomer();
+        customers.ServeCustomer();
+        customers.ServeCustomer();
+        customers.ServeCustomer();
+
+        // Defect(s) Found: It was removing customers before saving them to a variable to be accessed and displayed.
     }
 
     private readonly List<Customer> _queue = new();
@@ -67,7 +103,7 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        if (_queue.Count >= _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
@@ -88,8 +124,13 @@ public class CustomerService {
     /// Dequeue the next customer and display the information.
     /// </summary>
     private void ServeCustomer() {
-        _queue.RemoveAt(0);
+        if (_queue.Count <= 0)
+        {
+            Console.WriteLine("Customer Queue is empty.");
+            return;
+        }
         var customer = _queue[0];
+        _queue.RemoveAt(0);
         Console.WriteLine(customer);
     }
 
