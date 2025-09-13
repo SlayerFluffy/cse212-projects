@@ -36,19 +36,17 @@ public class PriorityQueueTests
             Assert.AreEqual(expectedResult[i].Value, removed);
             ++i;
         }
-
-
-        Assert.Fail("Implement the test case and then remove this.");
     }
 
     [TestMethod]
-    // Scenario: 
-    // Expected Result: 
-    // Defect(s) Found: 
+    // Scenario: Ensure that an empty queue throws an exception when Dequeue is called.
+    // Expected Result: An InvalidOperationException is thrown.
+    // Defect(s) Found: none
     public void TestPriorityQueue_2()
     {
         var priorityQueue = new PriorityQueue();
-        Assert.Fail("Implement the test case and then remove this.");
+
+    Assert.ThrowsException<InvalidOperationException>(() => priorityQueue.Dequeue());
     }
 
     // Add more test cases as needed below.
