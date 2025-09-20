@@ -1,3 +1,5 @@
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
+
 /// <summary>
 /// Defines a maze using a dictionary. The dictionary is provided by the
 /// user when the Maze object is created. The dictionary will contain the
@@ -33,6 +35,15 @@ public class Maze
     public void MoveLeft()
     {
         // FILL IN CODE
+        var here = _mazeMap[(_currX, _currY)];
+        if (here[0] == true)
+        {
+            _currX--;
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -42,6 +53,16 @@ public class Maze
     public void MoveRight()
     {
         // FILL IN CODE
+
+        var here = _mazeMap[(_currX, _currY)];
+        if (here[1] == true)
+        {
+            _currX++;
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -51,6 +72,16 @@ public class Maze
     public void MoveUp()
     {
         // FILL IN CODE
+
+        var here = _mazeMap[(_currX, _currY)];
+        if (here[2])
+        {
+            _currY--;
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     /// <summary>
@@ -60,6 +91,15 @@ public class Maze
     public void MoveDown()
     {
         // FILL IN CODE
+        var here = _mazeMap[(_currX, _currY)];
+        if (here[3] == true)
+        {
+            _currY++;
+        }
+        else
+        {
+            throw new InvalidOperationException("Can't go that way!");
+        }
     }
 
     public string GetStatus()

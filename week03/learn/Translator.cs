@@ -1,3 +1,5 @@
+using System.Data;
+
 public class Translator
 {
     public static void Run()
@@ -25,6 +27,7 @@ public class Translator
     public void AddWord(string fromWord, string toWord)
     {
         // ADD YOUR CODE HERE
+        _words.Add(fromWord, toWord);
     }
 
     /// <summary>
@@ -35,6 +38,15 @@ public class Translator
     public string Translate(string fromWord)
     {
         // ADD YOUR CODE HERE
-        return "";
+        string translated =  "";
+        if (_words.ContainsKey(fromWord))
+        {
+            translated = _words[fromWord];
+        }
+        else
+        {
+            translated = "???";
+        }
+        return $"{translated}";
     }
 }
